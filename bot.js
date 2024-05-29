@@ -36,6 +36,13 @@ bot.on('chat', (username, message) => {
   }
 });
 
+bot.on('death', () => {
+  logger.warn('Bot has died. Attempting to use /back.');
+  bot.once('spawn', () => {
+    bot.chat('/back');
+  });
+});
+
 bot.on('error', (err) => {
   logger.error(`Bot encountered an error: ${err}`);
   process.exit(1); // Thoát với mã lỗi
